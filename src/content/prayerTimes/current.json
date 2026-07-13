@@ -1,0 +1,14 @@
+{
+  "hijriDate": "28 Muharram",
+  "gregorianLabel": "13 Jul.",
+  "scheduleDownloadUrl": "/documents/prayer-schedule.pdf",
+  "monthlyScheduleUrl": "/documents/monthly-schedule.pdf",
+  "rows": [
+    { "salaat": "Fajr", "adhaan": "05:23 AM", "iqamah": "05:45 AM" },
+    { "salaat": "Sunrise", "adhaan": "06:39 AM", "iqamah": "." },
+    { "salaat": "Dhuhr", "adhaan": "01:38 PM", "iqamah": "02:00 PM" },
+    { "salaat": "Asr", "adhaan": "05:15 PM", "iqamah": "05:30 PM" },
+    { "salaat": "Maghrib", "adhaan": "08:36 PM", "iqamah": "08:41 PM" },
+    { "salaat": "Isha", "adhaan": "09:53 PM", "iqamah": "10:05 PM" }
+  ]
+}

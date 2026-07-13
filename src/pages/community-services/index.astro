@@ -1,0 +1,50 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import { getCollection } from 'astro:content';
+
+const services = await getCollection('services');
+const supportive = services
+	.filter((s) => s.data.category === 'Supportive Services')
+	.sort((a, b) => a.data.order - b.data.order);
+const lifeEvents = services
+	.filter((s) => s.data.category === 'Life Events')
+	.sort((a, b) => a.data.order - b.data.order);
+---
+
+<BaseLayout title="Community Services" description="Supportive services and life-event services offered by NAMCC.">
+	<PageHeader title="Community Services" />
+
+	<section class="mx-auto max-w-7xl px-6 py-16">
+		<h2 class="mb-8 text-2xl font-bold text-brand-700">Supportive Services</h2>
+		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			{supportive.map((s) => (
+				<a href={`/services/${s.data.slug}/`} class="flex flex-col rounded-xl border border-neutral-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+					<h3 class="text-lg font-bold text-neutral-900">{s.data.title}</h3>
+					<p class="mt-2 flex-1 text-sm text-neutral-600">{s.data.summary}</p>
+					<span class="mt-4 text-sm font-semibold text-brand-600">Read More &rarr;</span>
+				</a>
+			))}
+		</div>
+
+		<h2 class="mb-8 mt-16 text-2xl font-bold text-brand-700">Life Events</h2>
+		<div class="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+			{lifeEvents.map((s) => (
+				<a href={`/services/${s.data.slug}/`} class="flex flex-col rounded-xl border border-neutral-100 bg-white p-6 shadow-sm transition hover:-translate-y-1 hover:shadow-lg">
+					<h3 class="text-lg font-bold text-neutral-900">{s.data.title}</h3>
+					<p class="mt-2 flex-1 text-sm text-neutral-600">{s.data.summary}</p>
+					<span class="mt-4 text-sm font-semibold text-brand-600">Read More &rarr;</span>
+				</a>
+			))}
+		</div>
+
+		<div class="mt-16 flex flex-wrap gap-4">
+			<a href="/volunteer/" class="rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-brand-700">
+				Volunteer
+			</a>
+			<a href="/get-in-touch/" class="rounded-full border border-brand-600 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-brand-700 transition hover:bg-brand-50">
+				Download Forms
+			</a>
+		</div>
+	</section>
+</BaseLayout>

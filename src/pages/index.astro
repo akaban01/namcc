@@ -1,0 +1,40 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Hero from '../components/Hero.astro';
+import PrayerTimes from '../components/PrayerTimes.astro';
+import EventsSection from '../components/EventsSection.astro';
+import ServicesGrid from '../components/ServicesGrid.astro';
+import ImamsSection from '../components/ImamsSection.astro';
+import NewToAustin from '../components/NewToAustin.astro';
+import AboutPreview from '../components/AboutPreview.astro';
+import ContactSection from '../components/ContactSection.astro';
+import { getCollection } from 'astro:content';
+import site from '../content/settings/site.json';
+import prayerTimes from '../content/prayerTimes/current.json';
+
+const jumuah = (await getCollection('jumuah')).map((j) => j.data);
+const events = (await getCollection('events'))
+	.map((e) => e.data)
+	.sort((a, b) => a.date.getTime() - b.date.getTime());
+const imams = (await getCollection('imams'))
+	.sort((a, b) => a.data.order - b.data.order)
+	.map((i) => ({ ...i.data, slug: i.id }));
+---
+
+<BaseLayout title="Home" description={site.tagline}>
+	<Hero tagline={site.tagline} />
+	<PrayerTimes
+		hijriDate={prayerTimes.hijriDate}
+		gregorianLabel={prayerTimes.gregorianLabel}
+		rows={prayerTimes.rows}
+		scheduleDownloadUrl={prayerTimes.scheduleDownloadUrl}
+		monthlyScheduleUrl={prayerTimes.monthlyScheduleUrl}
+		jumuah={jumuah}
+	/>
+	<EventsSection events={events} />
+	<ServicesGrid />
+	<ImamsSection imams={imams} />
+	<NewToAustin />
+	<AboutPreview />
+	<ContactSection address={site.address} email={site.email} phone={site.phone} mapEmbedUrl={site.mapEmbedUrl} />
+</BaseLayout>

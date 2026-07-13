@@ -1,0 +1,171 @@
+---
+interface SiteData {
+	siteName: string;
+	phone: string;
+	email: string;
+	facebook?: string;
+	twitter?: string;
+	instagram?: string;
+	youtube?: string;
+	mpHallBookingUrl?: string;
+	eidFestUrl?: string;
+}
+
+interface Props {
+	site: SiteData;
+}
+
+const { site } = Astro.props;
+
+const nav = [
+	{ label: 'Home', href: '/' },
+	{
+		label: 'About',
+		href: '/about-us/',
+		children: [
+			{ label: 'About us', href: '/about-us/' },
+			{ label: 'Leadership', href: '/leadership/' },
+			{ label: 'Governance', href: '/governance/' },
+			{ label: 'Privacy Policy', href: '/privacy-policy/' },
+		],
+	},
+	{ label: 'Announcements', href: '/announcements/' },
+	{ label: 'Meet the Imams', href: '/scholars/' },
+	{ label: '*New Expansion', href: '/new-expansion/' },
+	{
+		label: 'Community Services',
+		href: '/community-services/',
+		children: [
+			{ label: 'Volunteer', href: '/volunteer/' },
+			{ label: 'Funeral Services', href: '/services/funeral-services/' },
+			{ label: 'Nikah Services', href: '/services/nikah-services/' },
+			{ label: 'Download Forms', href: '/community-services/' },
+		],
+	},
+	{
+		label: 'Get Involved',
+		href: '/get-involved/',
+		children: [
+			{ label: 'Volunteer', href: '/volunteer/' },
+			{ label: 'Membership', href: '/membership/' },
+			{ label: 'Donate', href: '/donate/' },
+		],
+	},
+	{ label: 'Get In Touch', href: '/get-in-touch/' },
+];
+---
+
+<header class="sticky top-0 z-50 bg-white shadow-sm">
+	<div class="hidden border-b border-neutral-100 bg-brand-700 text-white lg:block">
+		<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-2 text-sm">
+			<div class="flex items-center gap-4">
+				{site.facebook && (
+					<a href={site.facebook} target="_blank" rel="noopener noreferrer" aria-label="Facebook" class="opacity-90 transition hover:opacity-100">
+						<svg viewBox="0 0 24 24" class="size-4 fill-current"><path d="M13.5 21v-8.1h2.72l.4-3.15h-3.12V7.75c0-.91.25-1.53 1.56-1.53h1.66V3.4A22 22 0 0 0 13.9 3.2c-2.36 0-3.98 1.44-3.98 4.08v2.47H7.2v3.15h2.72V21z"/></svg>
+					</a>
+				)}
+				{site.twitter && (
+					<a href={site.twitter} target="_blank" rel="noopener noreferrer" aria-label="Twitter" class="opacity-90 transition hover:opacity-100">
+						<svg viewBox="0 0 24 24" class="size-4 fill-current"><path d="M22 5.9c-.7.3-1.5.6-2.3.7.8-.5 1.5-1.3 1.8-2.3-.8.5-1.7.8-2.6 1a4.1 4.1 0 0 0-7 3.7A11.6 11.6 0 0 1 3.4 4.6a4.1 4.1 0 0 0 1.3 5.5c-.7 0-1.3-.2-1.9-.5v.1c0 2 1.4 3.6 3.3 4a4.2 4.2 0 0 1-1.8.1 4.1 4.1 0 0 0 3.8 2.9A8.3 8.3 0 0 1 2 18.4a11.6 11.6 0 0 0 6.3 1.9c7.5 0 11.7-6.3 11.7-11.7v-.5c.8-.6 1.5-1.3 2-2.2z"/></svg>
+					</a>
+				)}
+				{site.instagram && (
+					<a href={site.instagram} target="_blank" rel="noopener noreferrer" aria-label="Instagram" class="opacity-90 transition hover:opacity-100">
+						<svg viewBox="0 0 24 24" class="size-4 fill-current"><path d="M12 2.2c2.7 0 3 0 4 .05 1 .05 1.7.2 2.3.45.6.25 1.1.6 1.6 1.1.5.5.85 1 1.1 1.6.25.6.4 1.3.45 2.3.05 1 .05 1.3.05 4s0 3-.05 4c-.05 1-.2 1.7-.45 2.3a4.6 4.6 0 0 1-1.1 1.6 4.6 4.6 0 0 1-1.6 1.1c-.6.25-1.3.4-2.3.45-1 .05-1.3.05-4 .05s-3 0-4-.05c-1-.05-1.7-.2-2.3-.45a4.6 4.6 0 0 1-1.6-1.1 4.6 4.6 0 0 1-1.1-1.6c-.25-.6-.4-1.3-.45-2.3-.05-1-.05-1.3-.05-4s0-3 .05-4c.05-1 .2-1.7.45-2.3.25-.6.6-1.1 1.1-1.6.5-.5 1-.85 1.6-1.1.6-.25 1.3-.4 2.3-.45 1-.05 1.3-.05 4-.05zm0 1.8c-2.65 0-2.97 0-4 .05-.86.04-1.33.18-1.64.3-.41.16-.71.35-1.02.66-.31.31-.5.6-.66 1.02-.12.31-.26.78-.3 1.64-.05 1.03-.05 1.35-.05 4s0 2.97.05 4c.04.86.18 1.33.3 1.64.16.41.35.71.66 1.02.31.31.6.5 1.02.66.31.12.78.26 1.64.3 1.03.05 1.35.05 4 .05s2.97 0 4-.05c.86-.04 1.33-.18 1.64-.3.41-.16.71-.35 1.02-.66.31-.31.5-.61.66-1.02.12-.31.26-.78.3-1.64.05-1.03.05-1.35.05-4s0-2.97-.05-4c-.04-.86-.18-1.33-.3-1.64a2.8 2.8 0 0 0-.66-1.02 2.8 2.8 0 0 0-1.02-.66c-.31-.12-.78-.26-1.64-.3-1.03-.05-1.35-.05-4-.05zm0 3.05a4.95 4.95 0 1 1 0 9.9 4.95 4.95 0 0 1 0-9.9zm0 1.8a3.15 3.15 0 1 0 0 6.3 3.15 3.15 0 0 0 0-6.3zm5.15-1.98a1.16 1.16 0 1 1-2.32 0 1.16 1.16 0 0 1 2.32 0z"/></svg>
+					</a>
+				)}
+				{site.youtube && (
+					<a href={site.youtube} target="_blank" rel="noopener noreferrer" aria-label="Youtube" class="opacity-90 transition hover:opacity-100">
+						<svg viewBox="0 0 24 24" class="size-4 fill-current"><path d="M21.6 7.2a2.9 2.9 0 0 0-2-2C17.9 4.7 12 4.7 12 4.7s-5.9 0-7.6.5a2.9 2.9 0 0 0-2 2A30 30 0 0 0 1.8 12a30 30 0 0 0 .5 4.8 2.9 2.9 0 0 0 2 2c1.8.5 7.6.5 7.6.5s5.9 0 7.6-.5a2.9 2.9 0 0 0 2-2 30 30 0 0 0 .6-4.8 30 30 0 0 0-.6-4.8zM10 15.3V8.7l5.7 3.3z"/></svg>
+					</a>
+				)}
+			</div>
+			<div class="flex items-center gap-6">
+				<a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`} class="opacity-90 transition hover:opacity-100">{site.phone}</a>
+				<a href={`mailto:${site.email}`} class="opacity-90 transition hover:opacity-100">{site.email}</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="hidden border-b border-neutral-100 lg:block">
+		<div class="mx-auto flex max-w-7xl items-center justify-end gap-3 px-6 py-2 text-sm font-medium">
+			{site.mpHallBookingUrl && (
+				<a href={site.mpHallBookingUrl} target="_blank" rel="noopener noreferrer" class="text-neutral-700 transition hover:text-brand-600">Book MP Hall</a>
+			)}
+			{site.eidFestUrl && (
+				<a href={site.eidFestUrl} target="_blank" rel="noopener noreferrer" class="text-neutral-700 transition hover:text-brand-600">ATX Eid Fest</a>
+			)}
+			<a href="/donate/" class="rounded-full bg-gold-500 px-4 py-1.5 text-white transition hover:bg-gold-600">Donate</a>
+		</div>
+	</div>
+
+	<div class="mx-auto flex max-w-7xl items-center justify-between px-6 py-4">
+		<a href="/" class="flex items-center gap-3">
+			<img src="/images/namcc-logo.svg" alt={site.siteName} class="h-12 w-auto" />
+			<span class="text-lg font-bold text-brand-700">NAMCC</span>
+		</a>
+
+		<nav class="hidden lg:block" aria-label="Primary">
+			<ul class="flex items-center gap-1 text-sm font-semibold uppercase tracking-wide">
+				{nav.map((item) => (
+					<li class="group relative">
+						<a href={item.href} class="flex items-center gap-1 rounded px-3 py-2 text-neutral-700 transition hover:text-brand-600">
+							{item.label}
+							{item.children && (
+								<svg viewBox="0 0 20 20" class="size-3 fill-current"><path d="M5.5 7.5 10 12l4.5-4.5z"/></svg>
+							)}
+						</a>
+						{item.children && (
+							<ul class="invisible absolute left-0 top-full z-20 min-w-56 rounded-lg border border-neutral-100 bg-white py-2 opacity-0 shadow-xl transition group-hover:visible group-hover:opacity-100">
+								{item.children.map((child) => (
+									<li>
+										<a href={child.href} class="block px-4 py-2 text-xs font-medium normal-case tracking-normal text-neutral-700 transition hover:bg-brand-50 hover:text-brand-700">
+											{child.label}
+										</a>
+									</li>
+								))}
+							</ul>
+						)}
+					</li>
+				))}
+			</ul>
+		</nav>
+
+		<button id="mobile-menu-toggle" type="button" class="rounded p-2 text-neutral-700 lg:hidden" aria-label="Toggle menu" aria-expanded="false" aria-controls="mobile-menu">
+			<svg viewBox="0 0 24 24" class="size-7 fill-current"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+		</button>
+	</div>
+
+	<nav id="mobile-menu" class="hidden border-t border-neutral-100 bg-white lg:hidden" aria-label="Mobile">
+		<ul class="flex flex-col divide-y divide-neutral-100 px-4">
+			{nav.map((item) => (
+				<li class="py-2">
+					<a href={item.href} class="block py-1 text-sm font-semibold uppercase tracking-wide text-neutral-800">{item.label}</a>
+					{item.children && (
+						<ul class="ml-3 mt-1 flex flex-col gap-1 border-l border-neutral-200 pl-3">
+							{item.children.map((child) => (
+								<li>
+									<a href={child.href} class="block py-1 text-sm text-neutral-600">{child.label}</a>
+								</li>
+							))}
+						</ul>
+					)}
+				</li>
+			))}
+			<li class="flex items-center gap-3 py-3">
+				<a href="/donate/" class="rounded-full bg-gold-500 px-4 py-1.5 text-sm font-semibold text-white">Donate</a>
+				<a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`} class="text-sm text-neutral-600">{site.phone}</a>
+			</li>
+		</ul>
+	</nav>
+</header>
+
+<script>
+	const toggle = document.getElementById('mobile-menu-toggle');
+	const menu = document.getElementById('mobile-menu');
+	toggle?.addEventListener('click', () => {
+		const isHidden = menu?.classList.contains('hidden');
+		menu?.classList.toggle('hidden');
+		toggle.setAttribute('aria-expanded', String(!!isHidden));
+	});
+</script>

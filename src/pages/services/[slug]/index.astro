@@ -1,0 +1,27 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import PageHeader from '../../../components/PageHeader.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const services = await getCollection('services');
+	return services.map((service) => ({
+		params: { slug: service.data.slug },
+		props: { service },
+	}));
+}
+
+const { service } = Astro.props;
+const { Content } = await render(service);
+---
+
+<BaseLayout title={service.data.title} description={service.data.summary}>
+	<PageHeader title={service.data.title} breadcrumb={service.data.title} />
+	<article class="prose prose-neutral mx-auto max-w-3xl px-6 py-16 prose-headings:text-brand-700 prose-a:text-brand-600">
+		<p class="lead">{service.data.summary}</p>
+		<Content />
+	</article>
+	<div class="mx-auto max-w-3xl px-6 pb-16">
+		<a href="/community-services/" class="text-sm font-semibold text-brand-600 hover:text-brand-800">&larr; Back to Community Services</a>
+	</div>
+</BaseLayout>

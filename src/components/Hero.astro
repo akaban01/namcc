@@ -1,0 +1,28 @@
+---
+interface Props {
+	tagline: string;
+}
+const { tagline } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-brand-700 text-white">
+	<div class="absolute inset-0 opacity-70" style="background-image:url('/images/hero-pattern.svg'); background-size:200px 200px;"></div>
+	<div class="absolute inset-0 bg-gradient-to-b from-brand-800/60 via-brand-700/80 to-brand-700"></div>
+	<div class="relative mx-auto flex max-w-7xl flex-col items-center gap-6 px-6 py-24 text-center sm:py-32">
+		<span class="rounded-full border border-gold-400/50 bg-white/10 px-4 py-1 text-xs font-semibold uppercase tracking-widest text-gold-400">
+			North Austin Muslim Community Center
+		</span>
+		<h1 class="max-w-3xl text-4xl font-extrabold leading-tight sm:text-5xl lg:text-6xl">
+			Welcome to NAMCC <span class="text-gold-400">(Masjid Aisha)</span>
+		</h1>
+		<p class="max-w-2xl text-lg text-brand-50/90">{tagline}</p>
+		<div class="flex flex-wrap items-center justify-center gap-4 pt-2">
+			<a href="/donate/" class="rounded-full bg-gold-500 px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white shadow-lg transition hover:bg-gold-600">
+				Donate
+			</a>
+			<a href="/get-involved/" class="rounded-full border-2 border-white/70 px-7 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-white hover:text-brand-700">
+				Get Involved
+			</a>
+		</div>
+	</div>
+</section>

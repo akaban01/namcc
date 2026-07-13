@@ -1,0 +1,50 @@
+---
+interface Props {
+	address: string;
+	email: string;
+	phone: string;
+	mapEmbedUrl?: string;
+}
+
+const { address, email, phone, mapEmbedUrl } = Astro.props;
+---
+
+<section class="bg-neutral-50 py-20">
+	<div class="mx-auto grid max-w-7xl gap-10 px-6 lg:grid-cols-2 lg:items-center">
+		<div class="overflow-hidden rounded-2xl shadow-lg ring-1 ring-neutral-100">
+			{mapEmbedUrl ? (
+				<iframe
+					src={mapEmbedUrl}
+					class="h-80 w-full"
+					style="border:0"
+					loading="lazy"
+					referrerpolicy="no-referrer-when-downgrade"
+					title="NAMCC location map"
+				/>
+			) : (
+				<div class="flex h-80 w-full items-center justify-center bg-brand-50 text-brand-600">Map unavailable</div>
+			)}
+		</div>
+		<div>
+			<span class="text-xs font-bold uppercase tracking-widest text-gold-600">We'd Love to Hear From You</span>
+			<h2 class="mt-2 text-3xl font-extrabold text-brand-700 sm:text-4xl">Get In Touch</h2>
+			<dl class="mt-6 flex flex-col gap-4 text-neutral-700">
+				<div class="flex items-start gap-3">
+					<dt class="sr-only">Address</dt>
+					<dd>{address}</dd>
+				</div>
+				<div class="flex items-start gap-3">
+					<dt class="sr-only">Email</dt>
+					<dd><a href={`mailto:${email}`} class="font-semibold text-brand-600 hover:text-brand-800">{email}</a></dd>
+				</div>
+				<div class="flex items-start gap-3">
+					<dt class="sr-only">Phone</dt>
+					<dd><a href={`tel:${phone.replace(/[^+\d]/g, '')}`} class="font-semibold text-brand-600 hover:text-brand-800">{phone}</a></dd>
+				</div>
+			</dl>
+			<a href="/get-in-touch/" class="mt-6 inline-flex items-center gap-2 rounded-full bg-brand-600 px-6 py-3 text-sm font-semibold uppercase tracking-wide text-white transition hover:bg-brand-700">
+				Contact Us
+			</a>
+		</div>
+	</div>
+</section>

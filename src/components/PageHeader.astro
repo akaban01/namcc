@@ -1,0 +1,17 @@
+---
+interface Props {
+	title: string;
+	breadcrumb?: string;
+}
+const { title, breadcrumb = title } = Astro.props;
+---
+
+<section class="relative overflow-hidden bg-brand-700 text-white">
+	<div class="absolute inset-0 opacity-60" style="background-image:url('/images/hero-pattern.svg'); background-size:200px 200px;"></div>
+	<div class="relative mx-auto max-w-7xl px-6 py-16 text-center">
+		<h1 class="text-3xl font-extrabold sm:text-4xl">{title}</h1>
+		<p class="mt-2 text-sm text-brand-50/80">
+			<a href="/" class="hover:text-white">Home</a> &raquo; {breadcrumb}
+		</p>
+	</div>
+</section>

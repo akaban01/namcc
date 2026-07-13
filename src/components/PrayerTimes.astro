@@ -1,0 +1,89 @@
+---
+interface Row {
+	salaat: string;
+	adhaan: string;
+	iqamah: string;
+}
+
+interface JumuahEntry {
+	order: number;
+	label: string;
+	time: string;
+	khateeb: string;
+	topic: string;
+}
+
+interface Props {
+	hijriDate: string;
+	gregorianLabel: string;
+	rows: Row[];
+	scheduleDownloadUrl?: string;
+	monthlyScheduleUrl?: string;
+	jumuah: JumuahEntry[];
+}
+
+const { hijriDate, gregorianLabel, rows, scheduleDownloadUrl, monthlyScheduleUrl, jumuah } = Astro.props;
+---
+
+<section class="relative -mt-16 z-10">
+	<div class="mx-auto max-w-7xl px-6">
+		<div class="grid gap-6 lg:grid-cols-5">
+			<div class="rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-neutral-100 lg:col-span-3">
+				<div class="mb-4 flex flex-wrap items-center justify-between gap-2">
+					<h2 class="text-xl font-bold text-brand-700">Daily Prayer Timings</h2>
+					<span class="text-sm font-medium text-neutral-500">{gregorianLabel} ({hijriDate})</span>
+				</div>
+				<div class="overflow-x-auto">
+					<table class="w-full min-w-[420px] border-collapse text-sm">
+						<thead>
+							<tr class="border-b-2 border-brand-100 text-left uppercase tracking-wide text-neutral-500">
+								<th class="py-2 pr-4">Salaat</th>
+								<th class="py-2 pr-4">Adhaan</th>
+								<th class="py-2">Iqamah</th>
+							</tr>
+						</thead>
+						<tbody>
+							{rows.map((row) => (
+								<tr class="border-b border-neutral-100 last:border-0">
+									<td class="py-2.5 pr-4 font-semibold text-neutral-800">{row.salaat}</td>
+									<td class="py-2.5 pr-4 text-neutral-600">{row.adhaan}</td>
+									<td class="py-2.5 text-neutral-600">{row.iqamah}</td>
+								</tr>
+							))}
+						</tbody>
+					</table>
+				</div>
+				<div class="mt-5 flex flex-wrap gap-3">
+					{scheduleDownloadUrl && (
+						<a href={scheduleDownloadUrl} class="rounded-full bg-brand-600 px-5 py-2 text-xs font-semibold uppercase tracking-wide text-white transition hover:bg-brand-700">
+							Download Schedule
+						</a>
+					)}
+					{monthlyScheduleUrl && (
+						<a href={monthlyScheduleUrl} class="rounded-full border border-brand-600 px-5 py-2 text-xs font-semibold uppercase tracking-wide text-brand-700 transition hover:bg-brand-50">
+							Monthly Schedule
+						</a>
+					)}
+				</div>
+			</div>
+
+			<div class="rounded-2xl bg-brand-700 p-6 text-white shadow-2xl lg:col-span-2">
+				<h2 class="mb-4 text-xl font-bold">Friday Prayer Timings</h2>
+				<ul class="flex flex-col divide-y divide-white/15">
+					{jumuah
+						.sort((a, b) => a.order - b.order)
+						.map((j) => (
+							<li class="py-3 first:pt-0 last:pb-0">
+								<div class="flex items-baseline justify-between gap-2">
+									<span class="text-sm font-bold uppercase tracking-wide text-gold-400">{j.label}</span>
+									<span class="text-sm font-semibold">{j.time}</span>
+								</div>
+								<p class="mt-1 text-sm font-medium text-white">{j.khateeb}</p>
+								<p class="text-sm text-brand-50/80">{j.topic}</p>
+							</li>
+						))}
+				</ul>
+			</div>
+		</div>
+	</div>
+</section>

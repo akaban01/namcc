@@ -1,0 +1,66 @@
+---
+interface SiteData {
+	siteName: string;
+	address: string;
+	phone: string;
+	email: string;
+	newsletterUrl?: string;
+	copyrightText: string;
+}
+
+interface Props {
+	site: SiteData;
+}
+
+const { site } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="bg-brand-800 text-brand-50">
+	<div class="mx-auto grid max-w-7xl grid-cols-1 gap-10 px-6 py-14 md:grid-cols-3">
+		<div>
+			<h3 class="mb-4 text-lg font-bold text-white">Contact Us</h3>
+			<address class="not-italic leading-relaxed text-brand-100">
+				{site.address}<br />
+				<a href={`mailto:${site.email}`} class="transition hover:text-white">{site.email}</a><br />
+				<a href={`tel:${site.phone.replace(/[^+\d]/g, '')}`} class="transition hover:text-white">{site.phone}</a>
+			</address>
+		</div>
+
+		<div>
+			<h3 class="mb-4 text-lg font-bold text-white">Get In Touch</h3>
+			<form class="flex max-w-xs gap-2" action={site.newsletterUrl ?? '#'} target="_blank" rel="noopener noreferrer">
+				<label for="footer-email" class="sr-only">Email</label>
+				<input
+					id="footer-email"
+					type="email"
+					name="email"
+					required
+					placeholder="Email"
+					class="w-full rounded-full border-0 bg-white/10 px-4 py-2 text-sm text-white placeholder-brand-100 outline-none ring-1 ring-white/20 focus:ring-2 focus:ring-gold-400"
+				/>
+				<button
+					type="submit"
+					class="shrink-0 rounded-full bg-gold-500 px-4 py-2 text-sm font-semibold text-white transition hover:bg-gold-600"
+				>
+					Sign Up
+				</button>
+			</form>
+		</div>
+
+		<div>
+			<h3 class="mb-4 text-lg font-bold text-white">Support NAMCC</h3>
+			<div class="flex flex-wrap gap-3">
+				<a href="/donate/" class="rounded-full bg-gold-500 px-5 py-2 text-sm font-semibold text-white transition hover:bg-gold-600">Donate</a>
+				<a href="/volunteer/" class="rounded-full border border-white/30 px-5 py-2 text-sm font-semibold text-white transition hover:bg-white/10">Volunteer</a>
+			</div>
+		</div>
+	</div>
+
+	<div class="border-t border-white/10">
+		<div class="mx-auto flex max-w-7xl flex-col items-center justify-between gap-2 px-6 py-5 text-xs text-brand-100 sm:flex-row">
+			<p>{site.copyrightText.replace('2025', String(year))}</p>
+			<a href="/privacy-policy/" class="transition hover:text-white">Privacy Policy</a>
+		</div>
+	</div>
+</footer>

@@ -1,0 +1,15 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PageHeader from '../../components/PageHeader.astro';
+import ImamsSection from '../../components/ImamsSection.astro';
+import { getCollection } from 'astro:content';
+
+const imams = (await getCollection('imams'))
+	.sort((a, b) => a.data.order - b.data.order)
+	.map((i) => ({ ...i.data, slug: i.id }));
+---
+
+<BaseLayout title="Meet the Imams" description="Meet the resident scholars and imams of NAMCC.">
+	<PageHeader title="Meet the Imams" breadcrumb="Scholars" />
+	<ImamsSection imams={imams} />
+</BaseLayout>

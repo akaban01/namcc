@@ -1,0 +1,48 @@
+---
+const resources = [
+	{ title: 'Businesses and Services', href: '/get-in-touch/' },
+	{ title: "Driver's License", href: 'https://www.dps.texas.gov/section/driver-license' },
+	{ title: 'Change My Address', href: 'https://www.usps.com/manage/forward.htm' },
+];
+
+const programs = [
+	{ title: 'Youth', href: '/community-services/' },
+	{ title: 'Sisters', href: '/community-services/' },
+	{ title: 'Seniors', href: '/community-services/' },
+	{ title: 'Brothers', href: '/community-services/' },
+	{ title: 'Converts', href: '/convert-services/' },
+];
+---
+
+<section class="bg-brand-700 py-20 text-white">
+	<div class="mx-auto grid max-w-7xl gap-12 px-6 lg:grid-cols-2">
+		<div>
+			<span class="text-xs font-bold uppercase tracking-widest text-gold-400">Ahlan Wasahlan!</span>
+			<h2 class="mt-2 text-3xl font-extrabold sm:text-4xl">New to Austin</h2>
+			<p class="mt-4 max-w-md text-brand-50/90">
+				Welcome to Austin. We hope you will enjoy your stay. Here are a few resources you might find helpful:
+			</p>
+			<ul class="mt-6 flex flex-col gap-3">
+				{resources.map((r) => (
+					<li>
+						<a href={r.href} class="inline-flex items-center gap-2 font-semibold text-gold-400 transition hover:text-gold-500">
+							{r.title}
+							<svg viewBox="0 0 20 20" class="size-4 fill-current"><path d="M7 5l6 5-6 5V5z"/></svg>
+						</a>
+					</li>
+				))}
+			</ul>
+		</div>
+		<div>
+			<span class="text-xs font-bold uppercase tracking-widest text-gold-400">Get Connected</span>
+			<h2 class="mt-2 text-3xl font-extrabold sm:text-4xl">Our Programs</h2>
+			<div class="mt-6 grid grid-cols-2 gap-3 sm:grid-cols-3">
+				{programs.map((p) => (
+					<a href={p.href} class="rounded-xl bg-white/10 px-4 py-3 text-center text-sm font-semibold transition hover:bg-white/20">
+						{p.title}
+					</a>
+				))}
+			</div>
+		</div>
+	</div>
+</section>

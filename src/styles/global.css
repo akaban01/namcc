@@ -1,0 +1,29 @@
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+	--font-sans: "Poppins", ui-sans-serif, system-ui, sans-serif;
+
+	--color-brand-50: #eef6f2;
+	--color-brand-100: #d3e9dd;
+	--color-brand-200: #a7d3bb;
+	--color-brand-300: #7bbd99;
+	--color-brand-400: #4fa777;
+	--color-brand-500: #339160;
+	--color-brand-600: #256b49;
+	--color-brand-700: #1d5439;
+	--color-brand-800: #163e2b;
+	--color-brand-900: #0e281c;
+
+	--color-gold-400: #d4af37;
+	--color-gold-500: #c19a2e;
+	--color-gold-600: #a37f22;
+}
+
+html {
+	scroll-behavior: smooth;
+}
+
+body {
+	font-family: var(--font-sans);
+}

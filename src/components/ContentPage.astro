@@ -1,0 +1,20 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PageHeader from './PageHeader.astro';
+import { getEntry, render } from 'astro:content';
+
+interface Props {
+	slug: string;
+}
+
+const { slug } = Astro.props;
+const page = (await getEntry('pages', slug))!;
+const { Content } = await render(page);
+---
+
+<BaseLayout title={page.data.title} description={page.data.description}>
+	<PageHeader title={page.data.title} />
+	<article class="prose prose-neutral mx-auto max-w-3xl px-6 py-16 prose-headings:text-brand-700 prose-a:text-brand-600 prose-li:marker:text-brand-500">
+		<Content />
+	</article>
+</BaseLayout>
