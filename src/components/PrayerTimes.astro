@@ -28,25 +28,25 @@ const { hijriDate, gregorianLabel, rows, scheduleDownloadUrl, monthlyScheduleUrl
 <section class="relative -mt-16 z-10">
 	<div class="mx-auto max-w-7xl px-6">
 		<div class="grid gap-6 lg:grid-cols-5">
-			<div class="rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-neutral-100 lg:col-span-3">
+			<div class="min-w-0 rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-neutral-100 lg:col-span-3">
 				<div class="mb-4 flex flex-wrap items-center justify-between gap-2">
 					<h2 class="text-xl font-bold text-brand-700">Daily Prayer Timings</h2>
 					<span class="text-sm font-medium text-neutral-500">{gregorianLabel} ({hijriDate})</span>
 				</div>
 				<div class="overflow-x-auto">
-					<table class="w-full min-w-[420px] border-collapse text-sm">
+					<table class="w-full border-collapse text-sm">
 						<thead>
 							<tr class="border-b-2 border-brand-100 text-left uppercase tracking-wide text-neutral-500">
-								<th class="py-2 pr-4">Salaat</th>
-								<th class="py-2 pr-4">Adhaan</th>
+								<th class="py-2 pr-2 sm:pr-4">Salaat</th>
+								<th class="py-2 pr-2 sm:pr-4">Adhaan</th>
 								<th class="py-2">Iqamah</th>
 							</tr>
 						</thead>
 						<tbody>
 							{rows.map((row) => (
 								<tr class="border-b border-neutral-100 last:border-0">
-									<td class="py-2.5 pr-4 font-semibold text-neutral-800">{row.salaat}</td>
-									<td class="py-2.5 pr-4 text-neutral-600">{row.adhaan}</td>
+									<td class="py-2.5 pr-2 font-semibold text-neutral-800 sm:pr-4">{row.salaat}</td>
+									<td class="py-2.5 pr-2 text-neutral-600 sm:pr-4">{row.adhaan}</td>
 									<td class="py-2.5 text-neutral-600">{row.iqamah}</td>
 								</tr>
 							))}
@@ -67,7 +67,7 @@ const { hijriDate, gregorianLabel, rows, scheduleDownloadUrl, monthlyScheduleUrl
 				</div>
 			</div>
 
-			<div class="rounded-2xl bg-brand-700 p-6 text-white shadow-2xl lg:col-span-2">
+			<div class="min-w-0 rounded-2xl bg-brand-700 p-6 text-white shadow-2xl lg:col-span-2">
 				<h2 class="mb-4 text-xl font-bold">Friday Prayer Timings</h2>
 				<ul class="flex flex-col divide-y divide-white/15">
 					{jumuah
