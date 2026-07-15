@@ -12,7 +12,7 @@ publish_mode: editorial_workflow
 
 site_url: https://namcc.org
 display_url: https://namcc.org
-logo_url: /images/namcc-logo.svg
+logo_url: /images/namcc-logo.png
 
 collections:
   - name: "settings"

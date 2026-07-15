@@ -4,6 +4,7 @@ import Hero from '../components/Hero.astro';
 import PrayerTimes from '../components/PrayerTimes.astro';
 import EventsSection from '../components/EventsSection.astro';
 import ServicesGrid from '../components/ServicesGrid.astro';
+import AppDownload from '../components/AppDownload.astro';
 import ImamsSection from '../components/ImamsSection.astro';
 import NewToAustin from '../components/NewToAustin.astro';
 import AboutPreview from '../components/AboutPreview.astro';
@@ -33,6 +34,7 @@ const imams = (await getCollection('imams'))
 	/>
 	<EventsSection events={events} />
 	<ServicesGrid />
+	<AppDownload />
 	<ImamsSection imams={imams} />
 	<NewToAustin />
 	<AboutPreview />
