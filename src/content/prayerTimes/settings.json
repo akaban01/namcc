@@ -1,0 +1,26 @@
+{
+  "latitude": 30.4032,
+  "longitude": -97.6889,
+  "timezone": "America/Chicago",
+  "calculationMethod": "NorthAmerica",
+  "madhab": "Shafi",
+  "_adjustmentsNote": "Small per-minute nudges calibrated against namcc.org's published times (ISNA method matched within 1-2 min out of the box). Tweak here if the mosque's actual Adhan times drift from this over time.",
+  "adjustments": {
+    "fajr": 2,
+    "sunrise": 1,
+    "dhuhr": 0,
+    "asr": 2,
+    "maghrib": 1,
+    "isha": 1
+  },
+  "_iqamahNote": "Adhan (call to prayer) is auto-calculated daily. Iqamah (start of congregational prayer) is set by mosque staff and must be updated by hand here when it changes — Maghrib is the exception, kept as a fixed number of minutes after Adhan per standard practice.",
+  "iqamah": {
+    "fajr": "5:45 AM",
+    "dhuhr": "2:00 PM",
+    "asr": "5:30 PM",
+    "maghribOffsetMinutes": 5,
+    "isha": "10:05 PM"
+  },
+  "scheduleDownloadUrl": "/documents/prayer-schedule.pdf",
+  "monthlyScheduleUrl": "/documents/monthly-schedule.pdf"
+}

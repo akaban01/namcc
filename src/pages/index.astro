@@ -11,7 +11,7 @@ import AboutPreview from '../components/AboutPreview.astro';
 import ContactSection from '../components/ContactSection.astro';
 import { getCollection } from 'astro:content';
 import site from '../content/settings/site.json';
-import prayerTimes from '../content/prayerTimes/current.json';
+import prayerSettings from '../content/prayerTimes/settings.json';
 
 const jumuah = (await getCollection('jumuah')).map((j) => j.data);
 const events = (await getCollection('events'))
@@ -25,11 +25,9 @@ const imams = (await getCollection('imams'))
 <BaseLayout title="Home" description={site.tagline}>
 	<Hero tagline={site.tagline} />
 	<PrayerTimes
-		hijriDate={prayerTimes.hijriDate}
-		gregorianLabel={prayerTimes.gregorianLabel}
-		rows={prayerTimes.rows}
-		scheduleDownloadUrl={prayerTimes.scheduleDownloadUrl}
-		monthlyScheduleUrl={prayerTimes.monthlyScheduleUrl}
+		settings={prayerSettings}
+		scheduleDownloadUrl={prayerSettings.scheduleDownloadUrl}
+		monthlyScheduleUrl={prayerSettings.monthlyScheduleUrl}
 		jumuah={jumuah}
 	/>
 	<EventsSection events={events} />

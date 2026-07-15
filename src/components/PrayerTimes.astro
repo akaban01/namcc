@@ -1,9 +1,5 @@
 ---
-interface Row {
-	salaat: string;
-	adhaan: string;
-	iqamah: string;
-}
+import { computeTodayPrayerTimes, type PrayerSettings } from '../lib/prayerTimes';
 
 interface JumuahEntry {
 	order: number;
@@ -14,15 +10,15 @@ interface JumuahEntry {
 }
 
 interface Props {
-	hijriDate: string;
-	gregorianLabel: string;
-	rows: Row[];
+	settings: PrayerSettings;
 	scheduleDownloadUrl?: string;
 	monthlyScheduleUrl?: string;
 	jumuah: JumuahEntry[];
 }
 
-const { hijriDate, gregorianLabel, rows, scheduleDownloadUrl, monthlyScheduleUrl, jumuah } = Astro.props;
+const { settings, scheduleDownloadUrl, monthlyScheduleUrl, jumuah } = Astro.props;
+const { rows, gregorianLabel, hijriDate } = computeTodayPrayerTimes(settings);
+const settingsJson = JSON.stringify(settings);
 ---
 
 <section class="relative -mt-16 z-10">
@@ -31,7 +27,7 @@ const { hijriDate, gregorianLabel, rows, scheduleDownloadUrl, monthlyScheduleUrl
 			<div class="min-w-0 rounded-2xl bg-white p-6 shadow-2xl ring-1 ring-neutral-100 lg:col-span-3">
 				<div class="mb-4 flex flex-wrap items-center justify-between gap-2">
 					<h2 class="text-xl font-bold text-brand-700">Daily Prayer Timings</h2>
-					<span class="text-sm font-medium text-neutral-500">{gregorianLabel} ({hijriDate})</span>
+					<span id="prayer-date-label" class="text-sm font-medium text-neutral-500">{gregorianLabel} ({hijriDate})</span>
 				</div>
 				<div class="overflow-x-auto">
 					<table class="w-full border-collapse text-sm">
@@ -42,12 +38,12 @@ const { hijriDate, gregorianLabel, rows, scheduleDownloadUrl, monthlyScheduleUrl
 								<th class="py-2">Iqamah</th>
 							</tr>
 						</thead>
-						<tbody>
+						<tbody id="prayer-times-body">
 							{rows.map((row) => (
-								<tr class="border-b border-neutral-100 last:border-0">
+								<tr class="border-b border-neutral-100 last:border-0" data-salaat={row.salaat.toLowerCase()}>
 									<td class="py-2.5 pr-2 font-semibold text-neutral-800 sm:pr-4">{row.salaat}</td>
-									<td class="py-2.5 pr-2 text-neutral-600 sm:pr-4">{row.adhaan}</td>
-									<td class="py-2.5 text-neutral-600">{row.iqamah}</td>
+									<td class="py-2.5 pr-2 text-neutral-600 sm:pr-4" data-field="adhaan">{row.adhaan}</td>
+									<td class="py-2.5 text-neutral-600" data-field="iqamah">{row.iqamah}</td>
 								</tr>
 							))}
 						</tbody>
@@ -87,3 +83,29 @@ const { hijriDate, gregorianLabel, rows, scheduleDownloadUrl, monthlyScheduleUrl
 		</div>
 	</div>
 </section>
+
+<script type="application/json" id="prayer-settings-data" set:html={settingsJson} />
+
+<script>
+	import { computeTodayPrayerTimes } from '../lib/prayerTimes';
+
+	const dataEl = document.getElementById('prayer-settings-data');
+	if (dataEl?.textContent) {
+		const settings = JSON.parse(dataEl.textContent);
+		// The static build reflects whatever day it was last deployed; recompute for the
+		// visitor's actual "today" so the table stays correct between deploys.
+		const { rows, gregorianLabel, hijriDate } = computeTodayPrayerTimes(settings);
+
+		const dateLabel = document.getElementById('prayer-date-label');
+		if (dateLabel) dateLabel.textContent = `${gregorianLabel} (${hijriDate})`;
+
+		for (const row of rows) {
+			const tr = document.querySelector(`tr[data-salaat="${row.salaat.toLowerCase()}"]`);
+			if (!tr) continue;
+			const adhaanCell = tr.querySelector('[data-field="adhaan"]');
+			const iqamahCell = tr.querySelector('[data-field="iqamah"]');
+			if (adhaanCell) adhaanCell.textContent = row.adhaan;
+			if (iqamahCell) iqamahCell.textContent = row.iqamah;
+		}
+	}
+</script>
